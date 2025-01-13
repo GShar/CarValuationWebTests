@@ -5,13 +5,14 @@ from pytest_bdd import scenarios, given, then, parsers, when
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
-from CommonUtils.Constants import URL, REGEX_REG_NUM, EXP_OUTPUT_FILE_NAME
-from PageObjectModel.car_details_page_object import *
-from PageObjectModel.car_search_page_object import *
+from common_utils.Constants import URL, REGEX_REG_NUM, EXP_OUTPUT_FILE_NAME
+from page_object_model.car_details_page_object import *
+from page_object_model.car_search_page_object import *
 
 scenarios("../features/car_details.feature")
 
 
+# read the reg num from the input file
 def read_reg_num_from_file(input_file_name):
     f = open(input_file_name)
     car_input_text = f.read()
@@ -19,6 +20,7 @@ def read_reg_num_from_file(input_file_name):
     return number_plate
 
 
+# contains the expected output to be used for verification
 @pytest.fixture()
 def expected_output():
     csv_data = pd.read_csv(EXP_OUTPUT_FILE_NAME)
@@ -56,7 +58,7 @@ def list_of_registration_numbers(lst_of_reg_num, input_file_name):
 
 
 @when('Search for registration number in car valuation website')
-def search_for_reg_numbers(lst_of_reg_num, records_from_search):
+def search_for_reg_numbers(chrome_browser, lst_of_reg_num, records_from_search):
     car_search = CarSearch(chrome_browser)
     car_details = CarDetails(chrome_browser)
 

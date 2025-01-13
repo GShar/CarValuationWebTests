@@ -1,9 +1,13 @@
 from selenium.webdriver.common.by import By
 
-from CommonUtils.BasePage import BasePage
+from common_utils.BasePage import BasePage
+
+'''
+Page Object class for the car search page
+'''
+
 
 class CarSearch(BasePage):
-
     txt_reg_num = (By.ID, "vrm-input")
     btn_search = (By.CSS_SELECTOR, "button[type='submit']")
 

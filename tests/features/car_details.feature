@@ -1,6 +1,7 @@
 Feature: Search car details using registration number
   Tests related to searching ona car valuation website and verify details
-  Background: User is on the car valuation page
+  Background:
+    Given User is on the car valuation page
 
   Scenario Outline: User searches car valuation website with multiple registration numbers
     Given I have a list of car registration numbers "<input_file_name>"
